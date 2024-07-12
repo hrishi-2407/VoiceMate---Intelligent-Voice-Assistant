@@ -1,10 +1,11 @@
 
 import speech_recognition as sr
 import pyttsx3
+import pywhatkit as pk
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
-def speak(command):
+def speak_command(command):
 
     """ RATE"""
     rate = engine.getProperty('rate')   # getting details of current speaking rate
@@ -19,25 +20,43 @@ def speak(command):
     engine.say(command)
     engine.runAndWait()
 
+def play(command):
+    song_name = command.replace('play', '')
+    print(f'Playing {song_name}')
+    speak_command(song_name)
+    pk.playonyt(song_name)
 
-def listen():
+def listen_for_command():
     r = sr.Recognizer()
-    with sr.Microphone() as source:
-        while True:
-            print("-- Say something! --")
+    while True:
+        print("-- Listening! --")
+        with sr.Microphone() as source:
             audio = r.listen(source)
-            try:
-                command = (r.recognize_google(audio))
-                if command.lower() == 'exit':
-                    break
-                else:
-                    print(command)
-                    speak(command)
-            except sr.UnknownValueError:
-                print("Could not understand audio")
-            except sr.RequestError as e:
-                print("Could not request results; {0}".format(e))
+        try:
+            command = (r.recognize_google(audio)).lower()
+            if 'wake' in command:
+                print('Hello.!! How can I help you??')
+                speak_command('Hello.!! How can I help you??')
+                continue
+            if 'hello' in command:
+                print('Hello.!! How can I help you??')
+                speak_command('Hello.!! How can I help you??')
+                continue
+            elif 'play' in command:
+                    play(command)
+            elif 'exit' in command:
+                break
+            else:
+                print('I didnt understand that.. Please try again.!!')
+                speak_command('I didnt understand that.. Please try again.!!')
+        except sr.UnknownValueError:
+            print("Could not understand audio\nSay it again")
+            speak_command("Could not understand audio\nSay it again")                                                          
+        except sr.RequestError as e:
+            print("Could not request results\nTry again; {0}".format(e))
+            speak_command("Could not request results\nTry again; {0}".format(e))
+
 
 if __name__ == '__main__':
-    listen()
+    listen_for_command()
 
