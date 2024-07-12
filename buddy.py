@@ -3,6 +3,7 @@ import speech_recognition as sr
 import pyttsx3
 import pywhatkit as pk
 import datetime
+import wikipedia
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
@@ -42,6 +43,24 @@ def date():
     print(f'Today is {day}{suffix} of {month}')
     speak_command((f'Today is {day}{suffix} of {month}'))
 
+def wiki_info(command):
+    query = command.replace('tell me something about', '')
+    print(f'Retrieving information about {query} from wikipedia')
+    speak_command(f'retrieving information about {query} from wikipedia')
+    try:
+        info = wikipedia.summary(query, sentences=2)
+        print(info)
+        speak_command(info)
+    except wikipedia.exceptions.PageError:
+        print(f"Sorry, couldn't find information about {query} on Wikipedia.")
+        speak_command(f"Sorry, couldn't find information about {query} on Wikipedia.")
+    except wikipedia.exceptions.DisambiguationError as e:
+        print(f"Wikipedia found multiple results for {query}. Here are a few possible options:")
+        speak_command(f"Wikipedia found multiple results for {query}. Here are a few possible options:")
+        for option in e.options[:3]:  # Display up to 3 options
+            print(option)
+            speak_command(option)
+
 def listen_for_command():
     r = sr.Recognizer()
     while True:
@@ -50,19 +69,22 @@ def listen_for_command():
             audio = r.listen(source)
         try:
             command = (r.recognize_google(audio)).lower()
-            if 'wake' in command or 'hello' in command or 'hi' in command:
+            if 'wake' in command or 'hello' in command:
                 print('Hello.!! How can I help you??')
                 speak_command('Hello, How can I help you')
-                continue
+                # continue  # --> error
             elif 'play' in command:
                 play(command)
                 break
             elif 'time' in command:
                 time()
-                break
+                # break
             elif 'date' in command:
                 date()
-                break
+                # break
+            elif 'tell' in command or 'who' in command:
+                wiki_info(command)
+                # break
             elif 'exit' in command:
                 break
             else:
