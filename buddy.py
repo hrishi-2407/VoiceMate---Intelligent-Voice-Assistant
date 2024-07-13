@@ -4,6 +4,7 @@ import pyttsx3
 import pywhatkit as pk
 import datetime
 import wikipedia
+import pyjokes
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
@@ -11,7 +12,7 @@ def speak_command(command):
 
     """ RATE"""
     rate = engine.getProperty('rate')   # getting details of current speaking rate
-    engine.setProperty('rate', 175)     # setting up new voice rate
+    engine.setProperty('rate', 150)     # setting up new voice rate
 
     """VOICE"""
     voices = engine.getProperty('voices')       #getting details of current voice
@@ -44,7 +45,7 @@ def date():
     speak_command((f'Today is {day}{suffix} of {month}'))
 
 def wiki_info(command):
-    query = command.replace('tell me something about', '')
+    query = command.replace('give me some information about', '')
     print(f'Retrieving information about {query} from wikipedia')
     speak_command(f'retrieving information about {query} from wikipedia')
     try:
@@ -60,6 +61,11 @@ def wiki_info(command):
         for option in e.options[:3]:  # Display up to 3 options
             print(option)
             speak_command(option)
+
+def jokes():
+    joke = pyjokes.get_joke()
+    print(joke)
+    speak_command(joke)
 
 def listen_for_command():
     r = sr.Recognizer()
@@ -82,9 +88,11 @@ def listen_for_command():
             elif 'date' in command:
                 date()
                 # break
-            elif 'tell' in command or 'who' in command:
+            elif 'give' in command:
                 wiki_info(command)
                 # break
+            elif 'joke' in command:
+                jokes()
             elif 'exit' in command:
                 break
             else:
