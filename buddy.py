@@ -5,6 +5,7 @@ import pywhatkit as pk
 import datetime
 import wikipedia
 import pyjokes
+from playsound import playsound
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
@@ -28,6 +29,11 @@ def play(command):
     print(f'Playing {song_name} on youtube')
     speak_command(f'Playing {song_name} on youtube')
     pk.playonyt(song_name)
+
+def google_search(command):
+    pk.search(command)
+    print(f'Searching.. {command}')
+    speak_command(f'Searching.. {command}')
 
 def time():
     current_time = datetime.datetime.now().strftime('%I:%M')
@@ -71,6 +77,7 @@ def listen_for_command():
     r = sr.Recognizer()
     while True:
         print("-- Listening! --")
+        playsound("F:\speech recognition\pop_up_sound.wav")
         with sr.Microphone() as source:
             audio = r.listen(source)
         try:
@@ -82,6 +89,8 @@ def listen_for_command():
             elif 'play' in command:
                 play(command)
                 break
+            elif 'how' in command:
+                google_search(command)
             elif 'time' in command:
                 time()
                 # break
