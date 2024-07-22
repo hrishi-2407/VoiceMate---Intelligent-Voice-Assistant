@@ -9,18 +9,15 @@ from playsound import playsound
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
+rate = engine.getProperty('rate')   # getting details of current speaking rate
+engine.setProperty('rate', 150)     # setting up new voice rate
+
+voices = engine.getProperty('voices')       #getting details of current voice
+engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
+# Voice ID: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0, 
+# Name: Microsoft Zira Desktop - English (United States)
+
 def speak_command(command):
-
-    """ RATE"""
-    rate = engine.getProperty('rate')   # getting details of current speaking rate
-    engine.setProperty('rate', 150)     # setting up new voice rate
-
-    """VOICE"""
-    voices = engine.getProperty('voices')       #getting details of current voice
-    engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
-    # Voice ID: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0, 
-    # Name: Microsoft Zira Desktop - English (United States) 
-
     engine.say(command)
     engine.runAndWait()
 
@@ -79,6 +76,8 @@ def listen_for_command():
         print("-- Listening! --")
         playsound("F:\speech recognition\pop_up_sound.wav")
         with sr.Microphone() as source:
+            r.energy_threshold = 10000
+            r.adjust_for_ambient_noise(source, 1.2)
             audio = r.listen(source)
         try:
             command = (r.recognize_google(audio)).lower()
