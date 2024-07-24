@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
 
-def wiki_search(query):
+def google_search(query):
 
     driver = webdriver.Chrome()
     driver.get("https://www.google.com/")
@@ -36,8 +36,8 @@ def wiki_search(query):
         driver.quit()
 
 
-s = wiki_search('personality')
-print(s)
+# s = google_search('personality')
+# print(s)
 
 
 
