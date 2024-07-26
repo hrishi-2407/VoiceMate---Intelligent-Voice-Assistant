@@ -11,8 +11,8 @@ def weather_indicator(city):
     temperature = dict1['current']['temp_c']
     weather = dict1['current']['condition']['text']
 
-    stats = f'The current temperature of {city} is {temperature} degree and the weather is {weather}'
-    return stats
+    status = f'The current temperature of {city} is {temperature} degree and the weather is {weather}'
+    return status
 
 
 
