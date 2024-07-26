@@ -9,6 +9,8 @@ from playsound import playsound
 from youtube_automation import poyt
 from selenium_google import google_search
 from weather_app import weather_indicator
+from selenium_maps import google_maps
+from news_app import news_headlines
 
 engine = pyttsx3.init() # engine is an object created using pyttsx3.init()
 
@@ -70,16 +72,22 @@ def weather(command):
     print(conditions)
     speak_command(conditions)
 
+def news():
+    news_list = news_headlines()
+    for news in news_list:
+        print(news)
+        speak_command(news)
+        
 def listen_for_command():
     r = sr.Recognizer()
     m = sr.Microphone()
+    print("-- Listening! --")
+    speak_command('listening')
     while True:
         playsound("F:\speech recognition\sound\pop_up_sound.wav")
-        print("-- Listening! --")
-        speak_command('listening')
         with m as source:
             r.energy_threshold  # Initial energy threshold before adjustment
-            r.adjust_for_ambient_noise(source, duration=2)  # Adjust for ambient noise to dynamically set the energy threshold
+            r.adjust_for_ambient_noise(source, duration=0.8)  # Adjust for ambient noise to dynamically set the energy threshold
             r.energy_threshold  # Adjusted energy threshold
 
             audio = r.listen(source)
@@ -102,6 +110,11 @@ def listen_for_command():
                 break
             elif any(keyword in command for keyword in ['what', 'give', 'info', 'information', 'who', 'how', 'search', 'find', 'tell']):
                 google_search_command(command)
+            elif any(keyword in command for keyword in ['directions', 'direction', 'take', 'route', 'root']):
+                google_maps(command)
+                break
+            elif any(keyword in command for keyword in ['news', 'breaking', 'headline', 'headlines']):
+                news()
             elif 'exit' in command:
                 break
             else:
