@@ -3,7 +3,7 @@ import requests
 import json
 
 def news_headlines():
-    API_key = '6d31aeddf05e4e34a4950fb285e83bec'
+    API_key = 'YOUR-API-KEY'
     url = f'https://newsapi.org/v2/top-headlines?country=in&apiKey=6d31aeddf05e4e34a4950fb285e83bec'
 
     r = requests.get(url)
