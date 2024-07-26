@@ -2,7 +2,7 @@ import requests
 
 def weather_indicator(city):
 
-    API_key = 'YOUR-API-KEY'
+    API_key = '5fe832d5127148f6ac725148242704'
     url = f'https://api.weatherapi.com/v1/current.json?key={API_key}&q={city}'
 
     r = requests.get(url)
