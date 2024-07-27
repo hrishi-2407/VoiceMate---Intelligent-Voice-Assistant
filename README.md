@@ -24,12 +24,12 @@ The assistant can fetch directions for a specified destination using Google Maps
 
 ## Key Technologies Used -
 
-• Python: The core language used for building the assistant. 
-• SpeechRecognition: Library for converting speech to text. 
-• Pyttsx3: Library for text-to-speech conversion. 
-• Selenium: Used for web automation to interact with Google and YouTube. 
-• Playsound: For playing audio notifications. 
-• Various APIs and Libraries: For weather updates, news, etc.
+Python: The core language used for building the assistant. 
+SpeechRecognition: Library for converting speech to text. 
+Pyttsx3: Library for text-to-speech conversion. 
+Selenium: Used for web automation to interact with Google and YouTube. 
+Playsound: For playing audio notifications. 
+Various APIs and Libraries: For weather updates, news, etc.
 
 ## Conclusion -
 
