@@ -2,27 +2,27 @@
 
 VoiceMate is a sophisticated voice assistant that harnesses the power of natural language processing and web automation. This project is designed to make everyday tasks more efficient by leveraging voice commands to perform various web-based operations. The assistant can play music, fetch weather updates, provide news headlines, search for information on Google, and navigate directions using Google Maps.
 
-##Key Features -
+## Key Features -
 
-###1. Speech Recognition and Response:
+### 1. Speech Recognition and Response:
 The assistant listens for voice commands and responds with appropriate actions. It uses the speech_recognition library to interpret speech and pyttsx3 for voice responses.
 
-###2.Play YouTube Videos:
+### 2.Play YouTube Videos:
 Users can request the assistant to play specific videos on YouTube. The assistant uses Selenium for web automation to search and play the requested videos.
 
-###3. Weather Updates:
+### 3. Weather Updates:
 By stating the city name, users can get the current weather conditions. The assistant fetches weather data and provides verbal updates.
 
-###4. News Headlines:
+### 4. News Headlines:
 The assistant can fetch the latest news headlines and read them out to the user.
 
-###5. Google Search:
+### 5. Google Search:
 Users can ask the assistant to search for information on a specific topic on Google. It performs the search from trusted sources like Wikipedia and reads out the relevant information.
 
-###6. Directions on Google Maps:
+### 6. Directions on Google Maps:
 The assistant can fetch directions for a specified destination using Google Maps.
 
-##Key Technologies Used -
+## Key Technologies Used -
 
 • Python: The core language used for building the assistant.
 • SpeechRecognition: Library for converting speech to text.
