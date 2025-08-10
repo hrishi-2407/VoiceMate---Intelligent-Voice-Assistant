@@ -1,0 +1,9 @@
+.qodo
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+txt_selenium_google.txt
+txt_alexa.txt
+date_time_module.txt
